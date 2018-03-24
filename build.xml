@@ -1,0 +1,44 @@
+<project name="SBI" default="package">
+
+		<target name="clean">
+			<delete dir="Build"/>
+	
+			<echo>Hello World!!</echo>
+			
+			<mkdir dir="Build"/>
+			<mkdir dir="Build/classes"/>
+			<mkdir dir="Build/jar"/>
+			<mkdir dir="Build/war"/>
+			<mkdir dir="Build/ear"/>
+		</target>
+	
+		<target name="compile" depends="clean">
+	
+			<javac srcdir="src" destdir="Build/classes"/>
+	
+		</target>
+		
+		<target name="package" depends="compile">
+		
+			<jar destfile="Build/jar/sbi.jar" basedir="Build/classes"/>
+			
+			<war destfile="Build/war/sbi.war" webxml=" . ">
+			
+				<fileset dir="Build">
+					<include name="**/*.java"/>
+					<include name="**/*.class"/>
+					<exclude name="**/*.zip"/>
+				</fileset>
+			</war>	
+
+			<ear destfile="Build/ear/sbi.ear" appxml=" . ">
+				<fileset dir="Build">
+					<include name="**/*.java"/>
+					<include name="**/*.class"/>
+					<exclude name="**/*.zip"/>
+				</fileset>
+			</ear>			
+				
+			</target>	
+		
+</project>
